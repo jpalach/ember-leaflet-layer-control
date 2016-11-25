@@ -1,10 +1,10 @@
 import Ember from 'ember';
 import BaseLayer from 'ember-leaflet/components/base-layer';
-import ContainerMixin from 'ember-leaflet/mixins/container';
+import { ParentMixin } from 'ember-composability-tools';
 
 const {get, getProperties, isEmpty, set, isNone} = Ember;
 
-export default BaseLayer.extend(ContainerMixin,{
+export default BaseLayer.extend(ParentMixin,{
 	baselayer: false,
 	blockLayer: false,
 	default: false,
@@ -26,7 +26,7 @@ export default BaseLayer.extend(ContainerMixin,{
 			if (isEmpty(layerGroups)){
 				layerGroups = Ember.A();
 				set(container,'_layerGroups',layerGroups);
-			} 
+			}
 			layerGroups.addObject({
 				name:name,
 				layer:get(this,'_layer'),
@@ -39,7 +39,7 @@ export default BaseLayer.extend(ContainerMixin,{
 				set(container,'_baseLayers',baseLayers);
 			}
 			baseLayers.addObject({
-				name:name, 
+				name:name,
 				layer:get(this,'_layer._layer'),
 				default: defaultState
 			});
@@ -72,6 +72,6 @@ export default BaseLayer.extend(ContainerMixin,{
 				};
 			}
 		}
-		
+
     }
 });
